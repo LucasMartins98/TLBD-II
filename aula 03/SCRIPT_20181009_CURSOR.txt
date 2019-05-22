@@ -1,0 +1,28 @@
+declare @RM int
+declare @nome varchar(40)
+
+declare alunos_cursor cursor for select A.RM, A.NOME 
+                          from alunos A 
+						  where A.CURSO = (select CODIGO from cursos where DESCRICAO = 'INFORMATICA')
+open alunos_cursor
+
+fetch next from alunos_cursor into @RM, @nome
+
+while @@FETCH_STATUS = 0
+begin
+	select 'RM:' + LTRIM(STR(@RM)) + ', NOME:' + @nome
+	select M.DESCRICAO, AVG(MENCAO)
+	from alunos A
+	inner join cursos C on C.CODIGO = A.CURSO
+	inner join notas N on N.RM = A.RM
+	inner join materias M on M.CODIGO = N.MATERIA AND M.CURSO = A.CURSO
+	WHERE A.RM = @RM 
+	GROUP BY M.DESCRICAO
+	ORDER BY M.DESCRICAO
+	
+	fetch next from alunos_cursor into @RM, @nome
+end
+
+close alunos_cursor
+
+deallocate alunos_cursor

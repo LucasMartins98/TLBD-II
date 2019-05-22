@@ -1,0 +1,8 @@
+select A.RM, A.NOME, M.DESCRICAO, AVG(MENCAO)
+from alunos A
+inner join cursos C on C.CODIGO = A.CURSO
+inner join notas N on N.RM = A.RM
+inner join materias M on M.CODIGO = N.MATERIA AND M.CURSO = A.CURSO
+WHERE C.DESCRICAO = 'INFORMATICA'
+GROUP BY A.RM, A.NOME, M.DESCRICAO
+ORDER BY A.RM, A.NOME, M.DESCRICAO

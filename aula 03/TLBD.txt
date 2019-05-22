@@ -1,0 +1,15 @@
+Declarar variavel
+declare @namevariavel formato
+
+
+Atribuir valor para uma variavel
+select @variavel = valor
+
+
+declare @categoria int
+select @categoria = CategoryId from Categories where CategoryName = 'becerages'
+
+Delete FRom Products where CategoryId = Categoria
+
+
+

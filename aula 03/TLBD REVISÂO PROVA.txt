@@ -1,0 +1,36 @@
+B)
+update Products
+set UnitPrice  = UnitPrice * 1.15
+where CategoryId = ( Select CategoryId Ffrom Categories where CategoryName = 'Beverages')
+
+Outra Forma com Join
+
+update P
+set P.UnitPrice = P.UnitPrice * 1.15
+from Products P
+Innerjoin Categories C on C.CategoryId = P.CategoryId
+where c.CategoryName = 'Beverages'
+
+
+
+C)
+update Cunstomers
+set Country = 'Brazil'
+where Country = 'Brasil' or Country = 'brasil' or Country = 'BRASIL'
+
+outra fomra
+
+where Country in ('Brasil', 'brasil','BRASIL')
+
+outra forma
+
+Upper (Country) like 'BRA[sz]IL'
+
+
+
+
+
+D)
+Delete From Customers
+Where CustomersId not in ( select CustomersId From Orders )
+
